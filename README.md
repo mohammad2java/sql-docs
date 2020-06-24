@@ -2,6 +2,7 @@
 ----------------
 
 #FUNCTIONS
+	
 	1) function listing
 	-------------------
 	SELECT * FROM ALL_OBJECTS WHERE OBJECT_TYPE IN ('FUNCTION');
