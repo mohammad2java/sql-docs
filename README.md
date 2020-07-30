@@ -243,4 +243,7 @@
 	
 	DROP FUNCTION function_name;  
 	
+	5) reset password expiry to unlimited 
 	
+	select * from dba_profiles where RESOURCE_NAME LIKE 'PASSWORD_LIFE_TIME';
+	ALTER PROFILE <profile_name> LIMIT PASSWORD_LIFE_TIME UNLIMITED; 
