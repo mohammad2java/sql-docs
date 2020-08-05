@@ -247,3 +247,7 @@
 	
 	select * from dba_profiles where RESOURCE_NAME LIKE 'PASSWORD_LIFE_TIME';
 	ALTER PROFILE <profile_name> LIMIT PASSWORD_LIFE_TIME UNLIMITED; 
+
+	6) Reset Oracle User Password-( First login as System or SYSDBA user and run below ).
+		ALTER USER <user> IDENTIFIED BY <password> ACCOUNT UNLOCK;
+	
