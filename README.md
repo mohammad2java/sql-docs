@@ -250,4 +250,11 @@
 
 	6) Reset Oracle User Password-( First login as System or SYSDBA user and run below ).
 		ALTER USER <user> IDENTIFIED BY <password> ACCOUNT UNLOCK;
+		
+		
+	7) changing httpport(default 8080) to 8010 
+	solutions: login as system user and Exec DBMS_XDB.SETHTTPPORT(3010);
+	program files>Run Sql Command Line> connect command>put user system and put correct password(used when installed)> run above proceedure.
+	
+	
 	
