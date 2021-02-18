@@ -1,6 +1,24 @@
 ##MYSQL
 ----------------
 
+		0.0) remote access of mysql/mariadb
+		----------------------------
+		 bydefault when you setup mysql it will accessible from same host(local) ,
+		 user cant not access from remote because of bind-address default value is :127.0.0.1
+		 if you change the bind-address = 0.0.0.0 means it will be accessible from all ips
+		 you can put single ip or multiple range of ips its upto you as admin.
+		 
+		 0.1) how to check current bind-address
+		 show variables like '%bind%';
+		 
+		 0.2) how to change it 
+		 -----------------
+		 you need to find the location of mysql conf file which is my.cnf
+		 when you check status of running mysql using:  systemctl status mysql
+		  you will see location of file like 
+		   /system.slice/mariadb.service
+           		└─24448 /usr/sbin/mysqld --defaults-file=/etc/my.cnf --user=mysql
+		 here config file location is : /etc/my.cnf
 
 		1) type of licence of mysql/mariadb
 		----------------------------
