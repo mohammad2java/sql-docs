@@ -1,5 +1,136 @@
 ##MYSQL
 ----------------
+basic concept:
+-------------
+		1) show databases; --> to show list of db 
+		1.2) create database <databaseName>;
+		1.3) drop database <database>
+		2) use <databaseName>; to select current db to perform operation
+		3) show tables;  to show list of tables in the selected db
+		3.1) create table <tablename>
+		3.2) drop table  <tableName>
+		3.3) truncate table dcl;
+		3.4) insert table <tableName>
+		---------------------------------------------------------	
+		create table <tablename> -- there are 2 ways 
+		1) fresh tables (create table <tableName> (col1 type,col2 type2....)
+		Example:
+			mysql> create table t_test1 (name varchar(100), age int);
+			Query OK, 0 rows affected (0.02 sec)
+			mysql> desc t_test1;
+			+-------+--------------+------+-----+---------+-------+
+			| Field | Type         | Null | Key | Default | Extra |
+			+-------+--------------+------+-----+---------+-------+
+			| name  | varchar(100) | YES  |     | NULL    |       |
+			| age   | int(11)      | YES  |     | NULL    |       |
+			+-------+--------------+------+-----+---------+-------+
+		
+		2) using exising table
+		2.1 ) will specific columns
+		----------------------------
+		mysql> desc t_test1;
+		+-------+--------------+------+-----+---------+-------+
+		| Field | Type         | Null | Key | Default | Extra |
+		+-------+--------------+------+-----+---------+-------+
+		| name  | varchar(100) | YES  |     | NULL    |       |
+		| age   | int(11)      | YES  |     | NULL    |       |
+		+-------+--------------+------+-----+---------+-------+
+		2 rows in set (0.02 sec)
+
+		mysql> create table t_t2 select name from t_test1;
+		Query OK, 0 rows affected (0.02 sec)
+		Records: 0  Duplicates: 0  Warnings: 0
+
+		mysql> desc t_t2;
+		+-------+--------------+------+-----+---------+-------+
+		| Field | Type         | Null | Key | Default | Extra |
+		+-------+--------------+------+-----+---------+-------+
+		| name  | varchar(100) | YES  |     | NULL    |       |
+		+-------+--------------+------+-----+---------+-------+
+		1 row in set (0.01 sec)
+		
+		
+		2.2) will all columns
+		-------------------------
+		mysql> create table t_t3 select * from t_test1;
+		Query OK, 0 rows affected (0.02 sec)
+		Records: 0  Duplicates: 0  Warnings: 0
+
+		mysql> desc t_t3;
+		+-------+--------------+------+-----+---------+-------+
+		| Field | Type         | Null | Key | Default | Extra |
+		+-------+--------------+------+-----+---------+-------+
+		| name  | varchar(100) | YES  |     | NULL    |       |
+		| age   | int(11)      | YES  |     | NULL    |       |
+		+-------+--------------+------+-----+---------+-------+
+		2 rows in set (0.01 sec)
+		
+	3.4) insert table ==there are 2 ways 
+	3.4.1) using values clause  --need to pass values for rows
+	3.4.2) using select clause  --need to pass value from existing tables
+
+       3.4.1) using values clause( with specific coumns)
+       ----------------------------
+       mysql> insert into t_t3(name) values ("amir");
+	Query OK, 1 row affected (0.01 sec)
+	mysql> select * from t_t3;
+	+------+------+
+	| name | age  |
+	+------+------+
+	| amir | NULL |
+	+------+------+
+	1 row in set (0.00 sec)
+	
+	3.4.1) using values clause( with All colmns)
+	--------------------------------------------
+	mysql> insert into t_t3  values ("amir",20);
+	Query OK, 1 row affected (0.01 sec)
+	mysql> select * from t_t3;
+	+------+------+
+	| name | age  |
+	+------+------+
+	| amir | NULL |
+	| amir |   20 |
+	+------+------+
+	2 rows in set (0.00 sec)
+		
+	3.4.2) using select clause(specific one)
+	-----------------------------------------
+	mysql> insert into t_t3(name) select AUTHOR from databasechangelog;
+	Query OK, 2 rows affected (0.00 sec)
+	Records: 2  Duplicates: 0  Warnings: 0
+	mysql> select * from t_t3;
+	+-----------+------+
+	| name      | age  |
+	+-----------+------+
+	| amir      | NULL |
+	| amir      |   20 |
+	| liquibase | NULL |
+	| liquibase | NULL |
+	+-----------+------+
+	4 rows in set (0.00 sec)
+       3.4.2) using select clause(all one)
+	-----------------------------------------
+	mysql> insert into t_t3 select AUTHOR,ORDEREXECUTED from databasechangelog;
+	Query OK, 2 rows affected (0.01 sec)
+	Records: 2  Duplicates: 0  Warnings: 0
+
+	mysql> select * from t_t3;
+	+-----------+------+
+	| name      | age  |
+	+-----------+------+
+	| amir      | NULL |
+	| amir      |   20 |
+	| liquibase | NULL |
+	| liquibase | NULL |
+	| liquibase |    1 |
+	| liquibase |    2 |
+	+-----------+------+
+	6 rows in set (0.00 sec)
+
+
+advance concept
+-----------------
 
 		0.0) remote access of mysql/mariadb
 		----------------------------
